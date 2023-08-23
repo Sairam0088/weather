@@ -1,0 +1,70 @@
+<div class="header">
+  <h1>Weather App</h1>
+  
+</div>
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input type="text" placeholder="Search city" name="city" [(ngModel)]="cityName">
+    <button (click)="onSubmit()">Search</button>
+  </form>
+</div>
+<div class="no-data" *ngIf="!weatherData">
+  {{defaultMessage}}
+  </div>
+<div class="container" *ngIf="weatherData">
+  <div class="upper-data">
+    <img src="../assets/hot.jpg" *ngIf="weatherData.current.temp_c > 25">
+    <img src="../assets/lowHot.jpg" *ngIf="weatherData.current.temp_c <= 25">
+    <img src="../assets/cool.jpg" *ngIf="weatherData.current.temp_c <= 5">
+    <div class="weather-data">
+      <div class="location">{{weatherData.location.name}}</div>
+      <div class="temperature">{{weatherData.current.temp_c | number: '1.0-0'}} °C</div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">
+      More Information
+    </div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/feelsLike.png">
+          <span>Feels like</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.feelslike_c}} °C
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/cloudy.png">
+          <span>Cloudy</span>
+        </div>
+        <div class="info-block-value">
+         {{weatherData.current.cloud}} %
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/humidity.png">
+          <span>Humidity</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.humidity}} %
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <img src="../assets/wind.png">
+          <span>Wind</span>
+        </div>
+        <div class="info-block-value">
+          {{weatherData.current.wind_kph}} kmph
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
